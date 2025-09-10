@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TikTok Hack Simulator</title>
+  <style>
+    body {
+      background: linear-gradient(90deg, #2b1b5b 0%, #112244 100%);
+      font-family: monospace;
+      color: #fff;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 { color: #ff4da6; }
+    input {
+      margin: 20px 0;
+      padding: 10px;
+      width: 80%;
+      border: 2px solid #ff4da6;
+      border-radius: 5px;
+      background: #111;
+      color: #fff;
+      font-size: 1em;
+    }
+    button {
+      padding: 12px 25px;
+      background: linear-gradient(90deg, #ff4da6, #ff884d);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin: 10px;
+    }
+    .results {
+      margin-top: 20px;
+      text-align: left;
+      white-space: pre-wrap;
+      background: rgba(0,0,0,0.5);
+      padding: 15px;
+      border-radius: 10px;
+      min-height: 200px;
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 0.8em;
+      color: #ddd;
+    }
+    .footer a {
+      color: #aaa;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>TIKTOK ACCOUNTS HACK<br>JUST BY ENTERING VICTIM USERNAME</h1>
+  <p>HACK MADE BY C9 UZAIR</p>
+  
+  <input type="text" id="username" placeholder="@username or full ID"/>
+  <br>
+  <button onclick="startHack()">Start Hacking Process</button>
+  <button onclick="generateAgain()">Generate Again</button>
+  
+  <div id="output" class="results">No activity yet.</div>
+  
+  <div class="footer">
+    <a href="disclaimer.html">About / Disclaimer</a>
+  </div>
+  
+  <script>
+    let lastUser = "";
+
+    function generatePasswords(base) {
+      const symbols = ["!", "@", "#", "$", "%", "&", "_", ".", "*"];
+      let fakePasswords = [];
+
+      // Generate 35 fake passwords
+      for (let i = 0; i < 35; i++) {
+        let randNum = Math.floor(1000 + Math.random() * 99999); 
+        let randSym = symbols[Math.floor(Math.random() * symbols.length)];
+        let style = Math.floor(Math.random() * 5);
+
+        if (style === 0) {
+          fakePasswords.push(base + randNum);
+        } else if (style === 1) {
+          fakePasswords.push(base + randSym + randNum);
+        } else if (style === 2) {
+          fakePasswords.push(base.charAt(0).toUpperCase() + base.slice(1) + randNum + randSym);
+        } else if (style === 3) {
+          fakePasswords.push(base + randNum + randSym + "A");
+        } else {
+          fakePasswords.push(base + randSym + randNum + base.charAt(0).toUpperCase());
+        }
+      }
+      return fakePasswords;
+    }
+
+    function startHack() {
+      const user = document.getElementById("username").value.trim();
+      const output = document.getElementById("output");
+
+      if (!user) {
+        output.innerText = "❌ Please enter a TikTok username!";
+        return;
+      }
+
+      lastUser = user; 
+      const base = user.replace("@","");
+      output.innerText = "🔍 Generating possible passwords for " + user + "...\n\n";
+
+      const fakePasswords = generatePasswords(base);
+      output.innerText += fakePasswords.join("\n");
+
+      setTimeout(() => {
+        const correct = fakePasswords[Math.floor(Math.random() * fakePasswords.length)];
+        output.innerText += "\n\n✅ Correct password found: " + correct;
+      }, 2500);
+    }
+
+    function generateAgain() {
+      if (!lastUser) {
+        document.getElementById("output").innerText = "❌ Enter a username first!";
+        return;
+      }
+      document.getElementById("username").value = lastUser;
+      startHack();
+    }
+  </script>
+</body>
+</html>
